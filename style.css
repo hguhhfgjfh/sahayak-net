@@ -1,0 +1,292 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: white;
+    font-size: 2.5em;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.subtitle {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.status-bar {
+    background: rgba(255,255,255,0.2);
+    border-radius: 15px;
+    padding: 15px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-around;
+}
+
+.status-item {
+    text-align: center;
+}
+
+.status-label {
+    display: block;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.status-value {
+    display: block;
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Main Buttons */
+.main-buttons {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.button-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.action-btn {
+    background: white;
+    border: none;
+    border-radius: 20px;
+    padding: 25px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    width: 100%;
+}
+
+.action-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.action-btn:active {
+    transform: translateY(-2px);
+}
+
+.btn-icon {
+    font-size: 3em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.btn-text {
+    font-size: 1.4em;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.btn-desc {
+    font-size: 0.9em;
+    color: #666;
+    display: block;
+}
+
+/* SOS Button */
+.sos-btn {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+}
+
+.sos-btn .btn-desc {
+    color: rgba(255,255,255,0.9);
+}
+
+/* Map Button */
+.map-btn {
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    color: white;
+}
+
+.map-btn .btn-desc {
+    color: rgba(255,255,255,0.9);
+}
+
+/* Chat Button */
+.chat-btn {
+    background: linear-gradient(135deg, #45b7d1, #96c93d);
+    color: white;
+}
+
+.chat-btn .btn-desc {
+    color: rgba(255,255,255,0.9);
+}
+
+/* Recent Activity */
+.recent-activity {
+    margin-top: 30px;
+}
+
+.recent-activity h3 {
+    color: white;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.activity-list {
+    background: rgba(255,255,255,0.95);
+    border-radius: 15px;
+    padding: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.sos-item {
+    background: #ffeaea;
+    border-left: 4px solid #ff6b6b;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.sos-location {
+    font-weight: bold;
+    color: #d63031;
+}
+
+.sos-time {
+    font-size: 0.8em;
+    color: #666;
+}
+
+.empty-state {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 20px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9em;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    margin: 20% auto;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 350px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.modal h2 {
+    margin-bottom: 15px;
+    color: #d63031;
+}
+
+.modal p {
+    margin-bottom: 25px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background: #dfe6e9;
+    color: #2d3436;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Chat and Map Pages */
+.page-header {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 5px 15px 5px 5px;
+}
+
+.page-title {
+    text-align: center;
+    color: #2d3436;
+    margin-top: 10px;
+}

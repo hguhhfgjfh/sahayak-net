@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahayak Net - Disaster Communication</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🆘 Sahayak Net</h1>
+            <p class="subtitle">Offline Disaster Communication</p>
+            <div class="status-bar">
+                <div class="status-item">
+                    <span class="status-label">Connected Users:</span>
+                    <span id="userCount" class="status-value">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Active SOS:</span>
+                    <span id="sosCount" class="status-value">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-buttons">
+            <div class="button-grid">
+                <button id="sosBtn" class="action-btn sos-btn">
+                    <span class="btn-icon">🆘</span>
+                    <span class="btn-text">BROADCAST SOS</span>
+                    <span class="btn-desc">Send emergency location</span>
+                </button>
+
+                <button id="mapBtn" class="action-btn map-btn">
+                    <span class="btn-icon">📍</span>
+                    <span class="btn-text">RESCUE MAP</span>
+                    <span class="btn-desc">View help locations</span>
+                </button>
+
+                <button id="chatBtn" class="action-btn chat-btn">
+                    <span class="btn-icon">💬</span>
+                    <span class="btn-text">LOCAL CHAT</span>
+                    <span class="btn-desc">Talk with survivors</span>
+                </button>
+            </div>
+        </main>
+
+        <div class="recent-activity">
+            <h3>Recent SOS Signals</h3>
+            <div id="sosList" class="activity-list">
+                <div class="empty-state">No active SOS signals</div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Connected to MOVE Truck Relief Network</p>
+        </footer>
+    </div>
+
+    <!-- SOS Modal -->
+    <div id="sosModal" class="modal">
+        <div class="modal-content">
+            <h2>Send Emergency SOS</h2>
+            <p>Your location and SOS signal will be broadcast to all rescue teams.</p>
+            <div class="modal-buttons">
+                <button id="confirmSOS" class="btn-danger">🚨 SEND SOS</button>
+                <button id="cancelSOS" class="btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

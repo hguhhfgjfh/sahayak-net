@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rescue Map - Sahayak Net</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .map-container {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .map-placeholder {
+            font-size: 1.2em;
+        }
+        
+        .map-legend {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .sos-color { background: #ff6b6b; }
+        .user-color { background: #74b9ff; }
+        .base-color { background: #00b894; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <button class="back-btn" onclick="window.location.href='index.html'">←</button>
+            <h2 class="page-title">📍 Rescue Map</h2>
+        </div>
+
+        <div class="map-container">
+            <div class="map-placeholder">
+                <div style="font-size: 3em; margin-bottom: 20px;">🗺️</div>
+                <h3>Offline Rescue Map</h3>
+                <p>In a real implementation, this would show:</p>
+                <ul style="text-align: left; margin-top: 15px;">
+                    <li>• Your current location</li>
+                    <li>• SOS signal locations</li>
+                    <li>• MOVE truck position</li>
+                    <li>• Safe zones and shelters</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="map-legend">
+            <h4>Map Legend</h4>
+            <div class="legend-item">
+                <div class="legend-color sos-color"></div>
+                <span>Emergency SOS Signals</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color user-color"></div>
+                <span>Other Survivors</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color base-color"></div>
+                <span>MOVE Truck & Safe Zones</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px; text-align: center;">
+            <button onclick="window.location.href='index.html'" class="btn-secondary" style="width: 100%;">
+                ← Back to Main Menu
+            </button>
+        </div>
+    </div>
+</body>
+</html>

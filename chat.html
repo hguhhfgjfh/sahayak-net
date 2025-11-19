@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Chat - Sahayak Net</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            max-height: 400px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        
+        .message.own {
+            background: #74b9ff;
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .message.other {
+            background: #dfe6e9;
+            color: #2d3436;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .message-header {
+            font-size: 0.8em;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            background: #f8f9fa;
+            border-top: 1px solid #ddd;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            margin-right: 10px;
+            font-size: 1em;
+        }
+        
+        .send-btn {
+            background: #74b9ff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+        
+        .user-count {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <button class="back-btn" onclick="window.location.href='index.html'">←</button>
+            <h2 class="page-title">💬 Local Chat</h2>
+        </div>
+
+        <div class="user-count">
+            <span id="chatUserCount">0</span> people in chat
+        </div>
+
+        <div class="chat-container">
+            <div id="chatMessages" class="chat-messages">
+                <div class="message other">
+                    <div class="message-header">System • Just now</div>
+                    <div>Welcome to Sahayak Net Chat! You can communicate with other survivors in your area.</div>
+                </div>
+            </div>
+            
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Type a message..." maxlength="200">
+                <button class="send-btn" onclick="sendMessage()">↑</button>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <button onclick="window.location.href='index.html'" class="btn-secondary" style="width: 100%;">
+                ← Back to Main Menu
+            </button>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const chatMessages = document.getElementById('chatMessages');
+        const messageInput = document.getElementById('messageInput');
+        const chatUserCount = document.getElementById('chatUserCount');
+
+        // Socket events
+        socket.on('chatHistory', (messages) => {
+            messages.forEach(msg => addMessage(msg, false));
+            scrollToBottom();
+        });
+
+        socket.on('newChat', (message) => {
+            addMessage(message, message.id !== socket.id);
+            scrollToBottom();
+        });
+
+        socket.on('userCount', (count) => {
+            chatUserCount.textContent = count;
+        });
+
+        // Send message
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (message) {
+                socket.emit('sendChat', {
+                    username: 'You',
+                    message: message
+                });
+                messageInput.value = '';
+            }
+        }
+
+        // Add message to chat
+        function addMessage(data, isOwn = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isOwn ? 'other' : 'own'}`;
+            messageDiv.innerHTML = `
+                <div class="message-header">${data.username} • ${data.timestamp}</div>
+                <div>${data.message}</div>
+            `;
+            chatMessages.appendChild(messageDiv);
+        }
+
+        // Scroll to bottom
+        function scrollToBottom() {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Send on Enter key
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Focus input on load
+        messageInput.focus();
+    </script>
+</body>
+</html>
